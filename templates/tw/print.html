@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet">-->
+
+    <script>
+        window.print();
+    </script>
+    <style>
+        .w3-code {
+            font-family: Consolas, "courier new";
+            font-size: 24px;
+            line-height: 1.4;
+            width: auto;
+            background-color: #E6E6E6;
+            color: #47BAAB;
+            padding: 8px 12px;
+            border-left: 4px solid #009688;
+            word-wrap: break-word
+        }
+        
+        table {
+            width: 100%;
+        }
+        
+        table,
+        th,
+        td {
+            border: 0px solid black;
+            border-collapse: collapse;
+            font-weight: bold;
+        }
+        
+        th,
+        td {
+            padding: 5px;
+            text-align: left;
+        }
+        
+        h1,
+        h2 {
+            color: #47BAAB
+        }
+        
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            font: 12pt "Tahoma";
+        }
+        
+        * {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+        
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            margin: 10mm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subpage {
+            padding: 1cm;
+            border: 1px #fff solid;
+            height: 257mm;
+            outline: 2cm whlte solid;
+        }
+        
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        @media print {
+            html,
+            .page {
+                margin: 0;
+                border: initial;
+                border-radius: initial;
+                width: initial;
+                min-height: initial;
+                box-shadow: initial;
+                background: initial;
+                page-break-after: always;
+            }
+        }
+        
+        .CssStyle {
+            border: 1px solid black;
+            font-weight: normal;
+            border: 1px groove;
+            width: 100%
+        }
+        
+        .parent img {
+            height: 50%;
+            width: 50%;
+            float: right;
+        }
+    </style>
+</head>
+
+<body onload="PrintLoad()">
+    <div class="book">
+        <div class="page">
+            <div class="subpage">
+
+                <h1>INFORMATION</h1>
+
+                <div class="w3-code notranslate htmlHigh">
+                    DISPLAY
+                </div>
+                <br>
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:50%">SW Version</td>
+                        <td style="width:50%" id="Display_PRD_SW_VER">1.01</td>
+                    </tr>
+                    <tr>
+                        <td>Distance</td>
+                        <td id="Display_FAC_ACU_DIST">12.5(km)</td>
+                    </tr>
+                    <tr>
+                        <td>Time</td>
+                        <td id="Display_FAC_ACU_TIME">0 (Day) 0 (Hr) 0 (Min) 0 (Sec)</td>
+                    </tr>
+                </table>
+
+                <br>
+                <div class="w3-code notranslate htmlHigh">
+                    DRIVER
+                </div>
+
+                <br>
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:50%">SW Version</td>
+                        <td style="width:50%" id="Driver_PRD_SW_VER">3.11</td>
+                    </tr>
+
+                </table>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <table class='CssStyle'>
+                    <tr>
+                        <td style="font-weight: normal;width:50%">Print Time</td>
+                        <td style="font-weight: normal;width:50%" id="NowTime">2016-05-17 10:35:25</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: normal;width:50%">Technician</td>
+                        <td style="font-weight: normal;width:50%">_________________</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: normal;width:50%">Maintenance Items</td>
+                        <td style="font-weight: normal;width:50%">3.11</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;" height=200></td>
+                        <td style="width:50%"></td>
+                    </tr>
+                </table>
+                <br>
+                <div class="parent">
+                    <img src="static/Images/PrintLOGO.png">
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+    <script src="static/js/jquery-1.12.3.min.js"></script>
+    <script src="static/js/control.js"></script>
+</body>
+
+</html>

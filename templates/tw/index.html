@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Control Panel</title>
+  <meta name="generator" content="Bootply" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/css/styles.css" rel="stylesheet">
+  <link href="static/css/bootstrap-dialog.min.css" rel="stylesheet">
+  <style type="text/css">
+    a:link {
+      color: #47BAAB
+    }
+    
+    a:visited {
+      color: #47BAAB
+    }
+    
+    .form-control:focus {
+      border-color: #47BAAB;
+    }
+    
+    .btn:focus,
+    .btn:active {
+      outline: none !important;
+      border-color: #47BAAB;
+    }
+  </style>
+
+</head>
+
+
+<body onload="showDiv('Info_tabs')">
+  <!-- Header -->
+  <!--<button type="button" onclick="testbtn()">OK</button>-->
+  <!--<button type="button" onclick="testbtn1()">OK</button>-->
+  <div id="top-nav" class="navbar navbar-light navbar-static-top" style="background-color:#e6fff2;">
+    <div class="container">
+      <div class="navbar-header">
+
+        <p class="navbar-brand" style="color:#47BAAB">Hydrive Diagnostic Assistant</p>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+              <i class="glyphicon glyphicon-user"></i> Admin <span class="caret"></span></a>
+            <ul id="g-account-menu" class="dropdown-menu" role="menu">
+              <li><a href="#">My Profile</a></li>
+              <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /container -->
+  </div>
+
+
+  <!-- Main -->
+  <div class="container">
+
+    <!-- upper section -->
+    <div class="row">
+      <div class="col-sm-3">
+        <!-- left -->
+        <h3><i class="glyphicon glyphicon-dashboard"></i> Dashboard</h3>
+        <hr>
+
+        <ul class="nav nav-stacked">
+          <li><a id="Information" href="#" onclick="showDiv('Info_tabs');DoInfo()"><i class="glyphicon glyphicon-info-sign"></i> Information</a></li>
+          <li><a href="#" onclick="showDiv('SWUpgrade');DoCheckFW()"><i class="glyphicon glyphicon-cloud-download"></i> SW Upgrade</a></li>
+          <li><a href="#" onclick="showDiv('Cust_tabs');DoCust()"><i class="glyphicon glyphicon-wrench"></i> Customization</a></li>
+          <li><a href="#" onclick="showDiv('VehicleTest')"><i class="glyphicon glyphicon-eye-open"></i> Vehicle Test</a></li>
+          <li><a href="#" onclick="showDiv('TestRecode');DoTestRecode()"><i class="glyphicon glyphicon-list"></i> Test Record</a></li>
+          <!--<li><a href="#" onclick="PDFFile('Print')"><i class="glyphicon glyphicon-print"></i> Print</a></li>-->
+          <li><a href="#" onclick="PrintSet()"><i class="glyphicon glyphicon-print"></i> Print</a></li>
+        </ul>
+
+        <hr>
+
+      </div>
+      <!-- /span-3 -->
+      <div class="col-sm-9">
+        <!--alert start-->
+        <!--<div id="alert" class="alert alert-info">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <span id="alertmsg">msg</span>
+        </div>-->
+
+        <!--alert end-->
+        <h3><i class="glyphicon glyphicon-pushpin"></i> Frame Number : <span id="PRD_FRM_NO">...</span> Model : <span id="PRD_MD_CODE">...</span>          </h3>
+        <hr>
+        <!-- 主要的東西都放在這裡~~~ 以下 -->
+
+        <!-- Info_tabs  元件開始-->
+        <div id="Info_tabs" class="col-md-12">
+          <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#System" data-toggle="tab">System</a></li>
+            <li><a href="#Display" data-toggle="tab" onclick="DoInfo_Dispaly()">Display</a></li>
+            <li><a href="#Driver" data-toggle="tab" onclick="DoInfo_Driver()">Driver</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <!--system tab-pane start-->
+            <div class="tab-pane active" id="System">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>System</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Last Modify Setting</td>
+                    <td><span id="PRD_LMOD_DATE">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Bike ID</td>
+                    <td><span id="USER_BIKE_ID">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Shop Name</td>
+                    <td><span id="DELR_NAME">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Shop Tel</td>
+                    <td><span id="DELR_TEL_NUM">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Auto Backup Record</td>
+                    <td><span id="BAK_FLAG">...</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--system tab-pane end-->
+            <!--Display tab-pane start-->
+            <div class="tab-pane" id="Display">
+              <!--Display table(Display) start-->
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Display</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Serial Number</td>
+                    <td><span id="PRD_SEQ_CODE">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>HW Version</td>
+                    <td><span id="PRD_HW_VER">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>SW Version</td>
+                    <td><span id="PRD_SW_VER">...</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--Display table(Display) end-->
+              <!--Display table(Accumulated) start-->
+              <hr>
+
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Accumulated</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Distance</td>
+                    <td><span id="FAC_ACU_DIST">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Time</td>
+                    <td><span id="FAC_ACU_TIME">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average Speed</td>
+                    <td><span id="FAC_ACU_ASPD">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average RPM</td>
+                    <td><span id="FAC_ACU_ARPM">...</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!--Display table(Accumulated) end-->
+              <!--Display table(SPORT) start-->
+              <hr>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>SPORT</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Distance</td>
+                    <td><span id="FAC_L8_DIST">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Time</td>
+                    <td><span id="FAC_L8_TIME">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average Speed</td>
+                    <td><span id="FAC_L8_ASPD">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average RPM</td>
+                    <td><span id="FAC_L8_ARPM">...</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--Display table(SPORT) end-->
+              <!--Display table(TOUR) start-->
+              <hr>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>TOUR</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Distance</td>
+                    <td><span id="FAC_L5_DIST">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Time</td>
+                    <td><span id="FAC_L5_TIME">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average Speed</td>
+                    <td><span id="FAC_L5_ASPD">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average RPM</td>
+                    <td><span id="FAC_L5_ARPM">...</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--Display table(TOUR) end-->
+              <!--Display table(ECO) start-->
+              <hr>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>ECO</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Distance</td>
+                    <td><span id="FAC_L1_DIST">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Time</td>
+                    <td><span id="FAC_L1_TIME">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average Speed</td>
+                    <td><span id="FAC_L1_ASPD">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average RPM</td>
+                    <td><span id="FAC_L1_ARPM">...</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--Display table(ECO) end-->
+              <!--Display table(AUTO) start-->
+              <hr>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>AUTO</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Distance</td>
+                    <td><span id="FAC_L9_DIST">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Time</td>
+                    <td><span id="FAC_L9_TIME">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average Speed</td>
+                    <td><span id="FAC_L9_ASPD">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average RPM</td>
+                    <td><span id="FAC_L9_ARPM">...</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--Display table(AUTO) end-->
+
+            </div>
+            <!--Display tab-pane end-->
+            <!--Driver tab-pane start-->
+            <div class="tab-pane" id="Driver">
+              <!--Driver table(Driver) start-->
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Driver</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Serial Number</td>
+                    <td><span id="Driver_PRD_SEQ_CODE">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>HW Version</td>
+                    <td><span id="Driver_PRD_HW_VER">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>SW Version</td>
+                    <td><span id="Driver_PRD_SW_VER">...</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--Driver table(Driver) end-->
+              <!--Driver table(Current Limit) start-->
+              <hr>
+
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Current Limit</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Distance</td>
+                    <td><span id="Driver_CL_OCP_SL8">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Time</td>
+                    <td><span id="Driver_CL_OCP_SL5">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average Speed</td>
+                    <td><span id="Driver_CL_OCP_SL1">...</span></td>
+                  </tr>
+                  <tr>
+                    <td>Average RPM</td>
+                    <td><span id="Driver_CL_OCP_AUTO">...</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!--Driver table(Current Limit) end-->
+            </div>
+            <!--Driver tab-pane end-->
+          </div>
+        </div>
+
+        <!--元件結束-->
+        <!--SW Upgrade 元件開始-->
+        <div id="SWUpgrade" class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Processing Status</h4>
+          </div>
+          <div class="panel-body">
+
+
+            <div class="row" id="id_Console_FW">
+
+              <div class="col-md-12"> <small>Console</small></div>
+              <div class="col-md-10">
+                <div class="progress">
+                  <div id="bar_Console_FW" class="progress-bar progress-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                    style="width: 0%">
+                    <span class="sr-only">0% Complete</span>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="col-md-2">
+                <button id="btn_Console_FW" class="btn btn-default btn-block" type="Button" onclick="Upgrade_FW('Console');UpgradeMsg()">Upgrade</button>
+              </div>
+            </div>
+            <div class="row" id="id_Display_FW">
+              <div class="col-md-12"> <small>Display</small></div>
+              <div class="col-md-10">
+                <div class="progress">
+                  <div id="bar_LCD_Display_FW" class="progress-bar progress-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                    aria-valuemax="100" style="width: 0%">
+                    <span class="sr-only">0% Complete</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-2">
+                <button id="btn_Display_FW" class="btn btn-default btn-block" type="Button" onclick="Upgrade_FW('LCD_Display');UpgradeMsg()">Upgrade</button>
+              </div>
+            </div>
+            <div class="row" id="id_Driver_FW">
+              <div class="col-md-12"> <small>Driver</small></div>
+              <div class="col-md-10">
+                <div class="progress">
+                  <div id="bar_Driver_FW" class="progress-bar progress-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                    style="width: 0%">
+                    <span class="sr-only">0% Complete</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-2">
+                <button id="btn_Driver_FW" class="btn btn-default btn-block" type="Button" onclick="Upgrade_FW('Driver');UpgradeMsg()">Upgrade</button>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+
+        <!--SW Upgrade 元件結束-->
+        <!--SW Upgrade MsgBox 元件開始-->
+        <div id="SWUpgradeMsgBox">
+          <small>Upgrade status</small>
+          <div class="progress">
+            <div id="bar_Upgrade" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+            </div>
+          </div>
+        </div>
+
+
+        <!--SW Upgrade MsgBox 元件結束-->
+        <!-- Cust_tabs  元件開始-->
+        <div id="Cust_tabs" class="col-md-12">
+          <ul class="nav nav-tabs" id="myTab1">
+            <li class="active"><a href="#PREFERENCE" data-toggle="tab">PREFERENCE</a></li>
+            <li><a href="#GENERAL" data-toggle="tab">GENERAL</a></li>
+          </ul>
+          <div class="tab-content">
+            <!--PREFERENCE tab-pane start-->
+            <div class="tab-pane active" id="PREFERENCE">
+              <input class="col-xs-4 text-center" name="submit" id="PreferenceCity" type="image" src="static/Images/Preference_CITY_S.png" alt=""
+                onclick="PREFERENCE_Mode('CITY');">
+              <input class="col-xs-4 text-center" name="submit" id="PreferenceMCLIMBING" type="image" src="static/Images/Preference_MCLIMBING_S.png"
+                alt="" onclick="PREFERENCE_Mode('MCLIMBING');">
+              <input class="col-xs-4 text-center" name="submit" id="PreferenceTREKKING" type="image" src="static/Images/Preference_TREKKING_S.png"
+                alt="" onclick="PREFERENCE_Mode('TREKKING');">
+              <!--<div class="col-xs-4 text-center"><img src="images/Preference_CITY_S.png" class="img-rounded img-responsive"></div>-->
+              <!--<div class="col-xs-4 text-center"><img src="images/Preference_MCLIMBING_S.png" class="img-rounded img-responsive"></div>-->
+              <!--<div class="col-xs-4 text-center"><img src="images/Preference_TREKKING_S.png" class="img-rounded img-responsive"></div>-->
+            </div>
+            <!--PREFERENCE tab-pane end-->
+            <div class="tab-pane" id="GENERAL">
+              <!--GENERAL tab-pane start-->
+              <br>
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-3 control-label">Bike ID</label>
+                  <div class="col-sm-9">
+                    <input type="input" class="form-control" id="USER_BIKE_ID" placeholder="Bike ID" value="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Shop Name</label>
+                  <div class="col-sm-9">
+                    <input type="input" class="form-control" id="DELR_NAME" placeholder="HYENA_SHOP">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Shop Tel</label>
+                  <div class="col-sm-9">
+                    <input type="input" class="form-control" id="DELR_TEL_NUM" placeholder="+886 425605910">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Last Maintenance</label>
+                  <div class="col-sm-9">
+                    <input type="input" class="form-control" id="PNL_LMAN_DIST">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Maintenance ODO(km)</label>
+                  <div class="col-sm-6">
+                    <input type="range" name="PNL_MAN_DIST" id="PNL_MAN_DIST_Slider" min="0" max="3000" step="100">
+                  </div>
+                  <div class="col-sm-2">
+                    <input type="number" class="form-control" id="PNL_MAN_DIST" step="100">
+                  </div>
+                  <div class="col-sm-1">
+                    <div class="checkbox">
+                      <input id="PNL_MAN_DIST_SW" type="checkbox" onclick="DoPNL_MAN_DIST()">disable
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Auto Sleep Time(min)</label>
+                  <div class="col-sm-7">
+                    <input type="range" name="PNL_ASLP_TIME" id="PNL_ASLP_TIME_Slider" min="0" max="1092" step="1">
+                  </div>
+                  <div class="col-sm-2">
+                    <input type="number" class="form-control" id="PNL_ASLP_TIME">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Wheel Diameter</label>
+                  <div class="col-sm-7">
+                    <input type="range" name="MISC_WEL_DIAM" id="MISC_WEL_DIAM_Slider" min="800" max="2500" step="1">
+                  </div>
+                  <div class="col-sm-2">
+                    <input type="number" class="form-control" id="MISC_WEL_DIAM">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-3 col-sm-9">
+                    <button type="button" class="btn btn-default" onclick="CustomizeApply()">Apply</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+          </form>
+
+          <!--GENERAL tab-pane end-->
+
+        </div>
+      </div>
+      <!-- Cust_tabs  元件結束-->
+
+      <!--Vehicle Test Start-->
+
+      <table id="VehicleTest" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Result</th>
+            <th>Test</th>
+            <th>ErrorCode</th>
+            <!--<th>Documents</th>-->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Display</td>
+            <td><span id="TestDisplay">...</span></td>
+            <td><button type="button" class="btn btn-default" onclick=TestDisplay();>Test</button></td>
+            <td><a href="#" id="TestDisplay_ErrorCode"></a></td>
+          </tr>
+          <tr>
+            <td>Light</td>
+            <td><span id="TestLight">...</span></td>
+            <td><button type="button" class="btn btn-default" onclick=TestLight(0);>Test</button></td>
+            <td><a href="#" id="TestLight_ErrorCode"></a></td>
+          </tr>
+          <tr id="TRTestBT">
+            <td>BT</td>
+            <td><span id="TestBT">...</span></td>
+            <td><button type="button" class="btn btn-default" onclick=TestBT();>Test</button></td>
+            <td><a href="#"  id="TestBT_ErrorCode"></a></td>
+          </tr>
+          <tr>
+            <td>Driver</td>
+            <td><span id="TestDriver">...</span></td>
+            <td><button type="button" class="btn btn-default" onclick=TestDriver();>Test</button></td>
+            <td><a href="#"  id="TestDriver_ErrorCode"></a></td>
+          </tr>
+          <tr>
+            <td>Cadence Sensor</td>
+            <td><span id="TestCadenceSensor">...</span></td>
+            <td><button type="button" class="btn btn-default" onclick=TestCadenceSensor()>Test</button></td>
+            <td><a href="#"  id="TestCadenceSensor_ErrorCode"></a></td>
+          </tr>
+          <tr>
+            <td>Speed Sensor</span>
+            </td>
+            <td><span id="TestSpeedSensor">...</span></td>
+            <td><button type="button" class="btn btn-default" onclick=TestSpeedSensor()>Test</button></td>
+            <td><a href="#"  id="TestSpeedSensor_ErrorCode"></a></td>
+          </tr>
+          <tr>
+            <td>Motor</td>
+            <td><span id="TestMotor">...</span></td>
+            <td><button type="button" class="btn btn-default" onclick=TestMotor()>Test</button></td>
+            <td><a href="#" id="TestMotor_ErrorCode"></a></td>
+          </tr>
+          <tr>
+            <td>Battery</td>
+            <td><span id="TestBattery">...</span></td>
+            <td><button type="button" class="btn btn-default" onclick=TestBattery()>Test</button></td>
+            <td><a href="#"  id="TestBattery_ErrorCode"></a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!--Vehicle Test end-->
+      <!--test recode start-->
+
+      <table id="TestRecode" class="table table-striped">
+        <thead>
+          <tr>
+            <th>ERROR</th>
+            <th>TYPE</th>
+            <th>ODO(km)</th>
+            <th>REACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span id="ErrorCode00"></span></td>
+            <td><span id="Type00"></td>
+            <td><span id="ODO00"></td>
+            <td><a href="#" id="Reaction00"></a></td>
+          </tr>
+          <tr>
+            <td><span id="ErrorCode01"></td>
+           <td><span id="Type01"></td>
+            <td><span id="ODO01"></td>
+            <td><a href="#" id="Reaction01"></a></td>
+          </tr>
+          <tr>
+            <td><span id="ErrorCode02"></td>
+           <td><span id="Type02"></td>
+            <td><span id="ODO02"></td>
+            <td><a href="#" id="Reaction02"></a></td>
+          </tr>
+          <tr>
+            <td><span id="ErrorCode03"></td>
+          <td><span id="Type03"></td>
+            <td><span id="ODO03"></td>
+            <td><a href="#" id="Reaction03"></a></td>
+          </tr>
+          <tr>
+            <td><span id="ErrorCode04"></td>
+            <td><span id="Type04"></td>
+            <td><span id="ODO04"></td>
+            <td><a href="#" id="Reaction04"></a></td>
+          </tr>
+          <tr>
+            <td><span id="ErrorCode05"></td>
+           <td><span id="Type05"></td>
+            <td><span id="ODO05"></td>
+            <td><a href="#" id="Reaction05"></a></td>
+          </tr>
+          <tr>
+            <td><span id="ErrorCode06"></td>
+            <td><span id="Type06"></td>
+            <td><span id="ODO06"></td>
+            <td><a href="#" id="Reaction06"></a></td>
+          </tr>
+          <tr>
+            <td><span id="ErrorCode07"></td>
+            <td><span id="Type07"></td>
+            <td><span id="ODO07"></td>
+            <td><a href="#" id="Reaction07" onclick="ahref('')">Reaction</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!--test recode end-->
+      <!--元件結束-->
+      <!--print start-->
+      <div id="Print">
+        <object id="printObj" class="col-sm-9" height="950" data="static/file/test.pdf" type="application/pdf">
+        alt : <a href="static/file/test.pdf">test.pdf</a>
+      </object>
+      </div>
+      <!--print end-->
+
+
+
+
+      <!-- 主要的東西都放在這裡~~~ 以上 -->
+    </div>
+    <!--/col-span-9-->
+
+
+
+
+    <!-- /Main -->
+
+
+
+
+
+
+    <!-- script references -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
+    <script src="static/js/jquery-1.12.3.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/bootstrap-dialog.min.js"></script>
+    <script src="static/js/class.js"></script>
+    <script src="static/js/ws.js"></script>
+    <script src="static/js/control.js"></script>
+</body>
+
+</html>
