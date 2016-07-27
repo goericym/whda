@@ -1,4 +1,3 @@
-import os
 import application
 import unittest
 
@@ -12,17 +11,13 @@ class applicationTestCase(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_en_url(self):
-        rv = self.app.get('/en',  follow_redirects=True)
-        assert u'hello en' in rv.data
+    def test_root_url(self):
+        rv = self.app.get('/',  follow_redirects=True)
+        print rv
+        # print rv.data
+        assert 'Control Panel' in rv.data
+        self.assertEqual(rv.status_code, 200)
 
-    def test_tw_url(self):
-        rv = self.app.get('/tw',  follow_redirects=True)
-        assert u'hello tw' in rv.data        
-
-    def test_tw_about_url(self):
-        rv = self.app.get('/tw/about',  follow_redirects=True)
-        assert u'about tw' in rv.data   
 
 if __name__ == '__main__':
     unittest.main()

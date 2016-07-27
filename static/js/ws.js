@@ -133,7 +133,7 @@ function doConnect() {
   try {
     var n = new Date().toLocaleString();
     console.log(n)
-    DLmsg.setMsg('Please Waiting... <a hef="#">download</a> <a hef="static/file/main_cmd.exe">FAQ</a>');
+    DLmsg.setMsg('Please Waiting... <a target="_blank" href="static/file/main_cmd.exe">download</a> <a target="_blank" href="#">FAQ</a>');
     url = "ws://127.0.0.1:58000/";
     websocket = new WebSocket(url);
     websocket.onopen = function (evt) { WSOpen(evt) };
